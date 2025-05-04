@@ -1,0 +1,38 @@
+table th, table td {
+    vertical-align: middle;
+}
+
+:host ::ng-deep .custom-thead {
+    background-color: #4eb946 !important;
+}
+
+.custom-purple{
+    background-color: #26991e;
+    border-color: #26991e;
+    color: white;
+}
+
+.custom-purple:hover{
+    background-color: #1c6e17;
+    border-color: #1c6e17;
+    color: gray;
+}
+
+.high-severity {
+    color: white;
+    background-color: red;
+    font-weight: bold;
+}
+  
+.medium-severity {
+    color: black;
+    background-color: orange;
+    font-weight: bold;
+}
+  
+.low-severity {
+    color: black;
+    background-color: yellow;
+    font-weight: bold;
+}
+  

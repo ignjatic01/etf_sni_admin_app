@@ -1,0 +1,91 @@
+<app-navbar></app-navbar>
+<div class="mt-4 d-flex justify-content-center gap-2">
+  <button class="btn custom-purple" data-bs-toggle="modal" data-bs-target="#biciklModal"><i class="bi bi-plus"></i> Dodaj uslugu</button>
+</div>
+<div class="container-fluid mt-4" style="max-width: 97%; margin: 0 auto; border: 1px #bbb solid; border-radius: 5px;">
+    <div class="table-responsive">
+      <table class="table table-responsive table-striped table-bordered text-center align-middle mt-2">
+        <thead>
+          <tr>
+            <th style="background-color: #4eb946;">#</th>
+            <th style="background-color: #4eb946;">Naziv</th>
+            <th style="background-color: #4eb946;">Rizik</th>
+            <th style="background-color: #4eb946;">Opcije</th>
+        </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of paginatedTipOsiguranjas; let i = index">
+            <td>{{ (currentPage - 1) * pageSize + i + 1 }}</td>
+            <td>{{ item.naziv }}</td>
+            <td>{{ item.rizik }}</td>
+            <td>
+                <button class="btn btn-sm btn-outline-danger me-1" (click)="obrisi(item)">
+                  <i class="bi bi-trash"></i>
+                </button>
+            </td>              
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <nav>
+        <ul class="pagination justify-content-center">
+          <li class="page-item" [class.disabled]="currentPage === 1">
+            <a class="page-link" (click)="changePage(currentPage - 1)">Prethodna</a>
+          </li>
+      
+          <li 
+            class="page-item" 
+            *ngFor="let page of ukupneStraneArray" 
+            [class.active]="page === currentPage">
+            <a class="page-link" (click)="changePage(page)">{{ page }}</a>
+          </li>
+      
+          <li class="page-item" [class.disabled]="currentPage === numOfPages">
+            <a class="page-link" (click)="changePage(currentPage + 1)">Sledeća</a>
+          </li>
+        </ul>
+    </nav>
+      
+</div>
+
+<form [formGroup]="form" id="addModal" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+  <div class="modal fade" id="biciklModal" tabindex="-1" aria-labelledby="biciklModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h5 class="modal-title" id="biciklModalLabel">Unos podataka</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Zatvori"></button>
+        </div>
+
+        <div class="modal-body">
+          <div class="row g-3 justify-content-center">
+
+
+            <div class="col-md-6">
+              <label for="naziv" class="form-label">Naziv</label>
+              <input type="text" id="naziv" class="form-control" formControlName="naziv" />
+            </div>
+
+            <div class="col-md-6">
+              <label for="rizik" class="form-label">Rizik</label>
+              <input type="number" min="0" max="1" id="rizik" class="form-control" formControlName="rizik" step="0.01"/>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <p style="color: red;">{{ infoPoruka }}</p>
+          <button type="button" id="closeAddBtn" class="btn btn-secondary" data-bs-dismiss="modal">Otkaži</button>
+          <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Sačuvaj</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</form>
+
+
+

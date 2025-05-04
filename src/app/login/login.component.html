@@ -1,0 +1,23 @@
+<div class="d-flex align-items-center justify-content-center min-vh-100">
+    <main class="form-signin w-50 m-auto" style="max-width: 500px;">
+      <form [formGroup]="form">
+        <h1 class="h3 mb-3 fw-normal">Prijava na sistem</h1>
+    
+        <div class="form-floating">
+          <input type="text" class="form-control" formControlName="username" placeholder="unesite korisničko ime" required="required">
+          <label for="floatingInput">Korisničko ime</label>
+        </div>
+        <br>
+        <div class="form-floating">
+          <input type="password" class="form-control" formControlName="password" placeholder="Unesite lozinku" required="required">
+          <label for="floatingPassword">Lozinka</label>
+        </div>
+        <br>
+        <button class="btn custom-green w-100 py-2" (click)="save()" [disabled]="form.invalid">Prijavi se</button>
+        
+      </form>
+      <p class="err-msg">{{ errorMessage }}</p>
+    </main>
+</div>
+
+
